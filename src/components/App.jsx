@@ -1,8 +1,10 @@
 import { Component } from 'react';
-import { FeedbackButtons } from './FeedbackButtons/FeedbackButtons';
-import { FeedbackStatistics } from './FeedbackStatistics/FeedbackStatistics';
+import { FeedbackOptions } from './FeedbackOptions/FeedbackOptions';
+import { Statistics } from './Statistics/Statistics';
 import { Layout } from './Layout/Layout';
 import { GlobalStyle } from './GlobalStyle';
+import { Section } from './Section/Section';
+import { Notification } from './Notification/Notification';
 
 export class App extends Component {
   state = {
@@ -11,6 +13,7 @@ export class App extends Component {
     bad: 0,
     total: 0,
     positivePercentage: 0,
+    visible: false,
   };
 
   handleClick = event => {
@@ -29,6 +32,7 @@ export class App extends Component {
             ? prevState.bad + 1
             : prevState.bad,
         total: prevState.total + 1,
+        visible: true,
       };
     });
 
@@ -41,29 +45,37 @@ export class App extends Component {
     });
   };
 
-  countTotalFeedback = () => {
-    this.setState(prevState => {
-      return {
-        total: prevState.total + 1,
-      };
-    });
-  };
+  // countTotalFeedback = () => {
+  //   this.setState(prevState => {
+  //     return {
+  //       total: prevState.total + 1,
+  //     };
+  //   });
+  // };
 
-  countPositiveFeedbackPercentage = () => {
-    this.setState(prevState => {
-      return {
-        positivePercentage: Math.round(
-          (prevState.good / prevState.total) * 100
-        ),
-      };
-    });
-  };
+  // countPositiveFeedbackPercentage = () => {
+  //   this.setState(prevState => {
+  //     return {
+  //       positivePercentage: Math.round(
+  //         (prevState.good / prevState.total) * 100
+  //       ),
+  //     };
+  //   });
+  // };
 
   render() {
     return (
       <Layout>
-        <FeedbackButtons onClick={this.handleClick} />
-        <FeedbackStatistics feedback={this.state} />
+        <Section title="Please leave feedback">
+          <FeedbackOptions onLeaveFeedback={this.handleClick} />
+        </Section>
+        <Section title="Statistics">
+          {!this.state.visible ? (
+            <Notification message="There is no feedback" />
+          ) : (
+            <Statistics feedback={this.state} />
+          )}
+        </Section>
         <GlobalStyle />
       </Layout>
     );
