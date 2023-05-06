@@ -1,7 +1,7 @@
 import { StatItem } from './Statistics.styled';
 
 export const Statistics = ({
-  feedback: { good, neutral, bad, total, positivePercentage, visible },
+  feedback: { good, neutral, bad, total, positivePercentage },
 }) => {
   return (
     <ul>
