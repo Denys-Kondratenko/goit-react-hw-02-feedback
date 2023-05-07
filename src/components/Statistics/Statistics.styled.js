@@ -6,5 +6,7 @@ export const StatItem = styled.li`
 `;
 
 export const StatTitle = styled.p`
-  text-transform: capitalize;
+  :first-letter {
+    text-transform: uppercase;
+  }
 `;
