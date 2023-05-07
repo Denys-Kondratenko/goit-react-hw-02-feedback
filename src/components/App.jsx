@@ -40,6 +40,8 @@ export class App extends Component {
             <Notification message="There is no feedback" />
           ) : (
             <Statistics
+              totalTitle={'total'}
+              percentageTitle={'positive feedback'}
               options={keys}
               values={this.state}
               total={total}

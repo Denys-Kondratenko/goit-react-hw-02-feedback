@@ -1,6 +1,13 @@
 import { StatItem, StatTitle } from './Statistics.styled';
 
-export const Statistics = ({ values, options, total, positivePercentage }) => {
+export const Statistics = ({
+  values,
+  options,
+  total,
+  positivePercentage,
+  totalTitle,
+  percentageTitle,
+}) => {
   return (
     <ul>
       {options.map((item, i) => {
@@ -12,11 +19,11 @@ export const Statistics = ({ values, options, total, positivePercentage }) => {
         );
       })}
       <StatItem>
-        <StatTitle>total:</StatTitle>
+        <StatTitle>{totalTitle}:</StatTitle>
         <span> {total}</span>
       </StatItem>
       <StatItem>
-        <StatTitle>positive feedback:</StatTitle>
+        <StatTitle>{percentageTitle}:</StatTitle>
         <span> {positivePercentage}</span>
       </StatItem>
     </ul>
