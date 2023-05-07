@@ -11,69 +11,40 @@ export class App extends Component {
     good: 0,
     neutral: 0,
     bad: 0,
-    total: 0,
-    positivePercentage: 0,
-    visible: false,
   };
 
-  handleClick = event => {
-    this.setState(prevState => {
-      return {
-        good:
-          event.target.dataset.action === 'good'
-            ? prevState.good + 1
-            : prevState.good,
-        neutral:
-          event.target.dataset.action === 'neutral'
-            ? prevState.neutral + 1
-            : prevState.neutral,
-        bad:
-          event.target.dataset.action === 'bad'
-            ? prevState.bad + 1
-            : prevState.bad,
-        total: prevState.total + 1,
-        visible: true,
-      };
-    });
-
-    this.setState(prevState => {
-      return {
-        positivePercentage: Math.round(
-          (prevState.good / prevState.total) * 100
-        ),
-      };
-    });
+  updateState = option => {
+    this.setState(prevState => ({ [option]: prevState[option] + 1 }));
   };
 
-  // countTotalFeedback = () => {
-  //   this.setState(prevState => {
-  //     return {
-  //       total: prevState.total + 1,
-  //     };
-  //   });
-  // };
+  countTotalFeedback = () => {
+    return Object.values(this.state).reduce((acc, item) => acc + item, 0);
+  };
 
-  // countPositiveFeedbackPercentage = () => {
-  //   this.setState(prevState => {
-  //     return {
-  //       positivePercentage: Math.round(
-  //         (prevState.good / prevState.total) * 100
-  //       ),
-  //     };
-  //   });
-  // };
+  countPositiveFeedbackPercentage = () => {
+    return Math.round((this.state.good / this.countTotalFeedback()) * 100 || 0);
+  };
 
   render() {
+    const keys = Object.keys(this.state);
+    const total = this.countTotalFeedback();
+    const visible = total;
+
     return (
       <Layout>
         <Section title="Please leave feedback">
-          <FeedbackOptions onLeaveFeedback={this.handleClick} />
+          <FeedbackOptions options={keys} onLeaveFeedback={this.updateState} />
         </Section>
         <Section title="Statistics">
-          {!this.state.visible ? (
+          {!visible ? (
             <Notification message="There is no feedback" />
           ) : (
-            <Statistics feedback={this.state} />
+            <Statistics
+              options={keys}
+              values={this.state}
+              total={total}
+              positivePercentage={this.countPositiveFeedbackPercentage()}
+            />
           )}
         </Section>
         <GlobalStyle />

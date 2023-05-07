@@ -7,4 +7,5 @@ export const ButtonList = styled.ul`
 
 export const Button = styled.button`
   cursor: pointer;
+  text-transform: capitalize;
 `;

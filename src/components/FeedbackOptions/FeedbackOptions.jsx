@@ -1,23 +1,17 @@
 import { ButtonList, Button } from './FeedbackOptions.styled';
 
-export const FeedbackOptions = ({ onLeaveFeedback }) => {
+export const FeedbackOptions = ({ onLeaveFeedback, options }) => {
   return (
     <ButtonList>
-      <li>
-        <Button type="button" data-action="good" onClick={onLeaveFeedback}>
-          Good
-        </Button>
-      </li>
-      <li>
-        <Button type="button" data-action="neutral" onClick={onLeaveFeedback}>
-          Neutral
-        </Button>
-      </li>
-      <li>
-        <Button type="button" data-action="bad" onClick={onLeaveFeedback}>
-          Bad
-        </Button>
-      </li>
+      {options.map((item, i) => {
+        return (
+          <li key={i}>
+            <Button type="button" onClick={() => onLeaveFeedback(item)}>
+              {item}
+            </Button>
+          </li>
+        );
+      })}
     </ButtonList>
   );
 };
