@@ -19,6 +19,10 @@ export const Statistics = ({ values, options, children }) => {
 };
 
 Statistics.propTypes = {
-  values: PropTypes.object,
+  values: PropTypes.shape({
+    good: PropTypes.number.isRequired,
+    neutral: PropTypes.number.isRequired,
+    bad: PropTypes.number.isRequired,
+  }),
   options: PropTypes.arrayOf(PropTypes.string),
 };
