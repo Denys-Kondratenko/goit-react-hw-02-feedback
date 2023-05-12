@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+
 import { StatItem, StatTitle } from './Statistics.styled';
 
 export const Statistics = ({
@@ -28,4 +30,13 @@ export const Statistics = ({
       </StatItem>
     </ul>
   );
+};
+
+Statistics.propTypes = {
+  values: PropTypes.object,
+  options: PropTypes.arrayOf(PropTypes.string),
+  total: PropTypes.number,
+  positivePercentage: PropTypes.number,
+  totalTitle: PropTypes.string,
+  percentageTitle: PropTypes.string,
 };
