@@ -2,14 +2,7 @@ import PropTypes from 'prop-types';
 
 import { StatItem, StatTitle } from './Statistics.styled';
 
-export const Statistics = ({
-  values,
-  options,
-  total,
-  positivePercentage,
-  totalTitle,
-  percentageTitle,
-}) => {
+export const Statistics = ({ values, options, children }) => {
   return (
     <ul>
       {options.map((item, i) => {
@@ -20,14 +13,7 @@ export const Statistics = ({
           </StatItem>
         );
       })}
-      <StatItem>
-        <StatTitle>{totalTitle}:</StatTitle>
-        <span> {total}</span>
-      </StatItem>
-      <StatItem>
-        <StatTitle>{percentageTitle}:</StatTitle>
-        <span> {positivePercentage}%</span>
-      </StatItem>
+      {children}
     </ul>
   );
 };
@@ -35,8 +21,4 @@ export const Statistics = ({
 Statistics.propTypes = {
   values: PropTypes.object,
   options: PropTypes.arrayOf(PropTypes.string),
-  total: PropTypes.number,
-  positivePercentage: PropTypes.number,
-  totalTitle: PropTypes.string,
-  percentageTitle: PropTypes.string,
 };

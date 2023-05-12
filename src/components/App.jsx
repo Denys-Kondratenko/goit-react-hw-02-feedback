@@ -5,6 +5,7 @@ import { Layout } from './Layout/Layout';
 import { GlobalStyle } from './GlobalStyle';
 import { Section } from './Section/Section';
 import { Notification } from './Notification/Notification';
+import { OtherStatistics } from './OtherStatistics/OtherStatistics';
 
 export class App extends Component {
   state = {
@@ -39,14 +40,14 @@ export class App extends Component {
           {!visible ? (
             <Notification message="There is no feedback" />
           ) : (
-            <Statistics
-              totalTitle={'total'}
-              percentageTitle={'positive feedback'}
-              options={keys}
-              values={this.state}
-              total={total}
-              positivePercentage={this.countPositiveFeedbackPercentage()}
-            />
+            <Statistics options={keys} values={this.state}>
+              <OtherStatistics
+                totalTitle={'total'}
+                percentageTitle={'positive feedback'}
+                total={total}
+                positivePercentage={this.countPositiveFeedbackPercentage()}
+              />
+            </Statistics>
           )}
         </Section>
         <GlobalStyle />
